@@ -1,0 +1,23 @@
+library ieee;
+use ieee.std_logic_1164.all;
+entity meio_somador is 
+    port ( x, y : in std_logic;
+              s, c : out std_logic );
+end meio_somador;
+
+architecture comportamento of meio_somador is 
+    component Xor_gate
+        port ( a, b: in std_logic;
+               f: out std_logic );
+    end component;
+    component and_gate
+        port ( b, a: in std_logic;
+               f: out std_logic );
+    end component;
+    signal s1, c1: std_logic;
+begin
+    P1: Xor_gate port map ( a => x, b => y, f => s1 );
+    P2: and_gate port map ( a => x, b => y, f => c1 );
+    s <= s1;
+    c <= c1;
+end comportamento;
