@@ -1,0 +1,131 @@
+-- Módulo 3: Máquina de Vendas de Doces (FSM)
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity FSM_Vending_Machine is
+    port (
+        -- Entradas Sincronizadas
+        clk     : in  std_logic; -- Clock lento (do Clock_Divider)
+        rst     : in  std_logic; -- Reset
+        
+        -- Entradas da Máquina de Doces
+        C       : in  std_logic_vector(1 downto 0); -- C1C0: Moeda inserida (00, 01, 10, 11) [cite: 9]
+        Cin     : in  std_logic;                    -- Detecção de moeda (nível alto) [cite: 13, 14]
+        S       : in  std_logic;                    -- Botão S (liberar doce) [cite: 16]
+        
+        -- Saídas da Máquina de Doces
+        D_out   : out std_logic_vector(7 downto 0); -- Valor acumulado (8 bits) [cite: 15]
+        R_out   : out std_logic                     -- Liberação do doce (1 ciclo de clock) [cite: 18, 20]
+    );
+end entity FSM_Vending_Machine;
+
+architecture Behavioral of FSM_Vending_Machine is
+    
+    -- Tipo para a Máquina de Estados (A FSM é implicitamente Moore ou Mealy, mas estados simples bastam)
+    type State_Type is (WAIT_COIN, DEBIT_CANDY, RELEASE_STATE); 
+    signal current_state, next_state : State_Type;
+    
+    -- Sinal interno para acumular o dinheiro
+    signal D_reg : unsigned(7 downto 0) := (others => '0'); 
+    
+    -- Sinal auxiliar para a saída R (deve durar apenas 1 ciclo)
+    signal R_temp : std_logic := '0';
+    
+    -- Constantes
+    constant COST : unsigned(7 downto 0) := to_unsigned(80, 8); -- Doce custa 80 centavos [cite: 15]
+    constant COIN_5 : unsigned(7 downto 0) := to_unsigned(5, 8);
+    constant COIN_10 : unsigned(7 downto 0) := to_unsigned(10, 8);
+    constant COIN_25 : unsigned(7 downto 0) := to_unsigned(25, 8);
+
+    -- Função para determinar o valor da moeda
+    function get_coin_value (C_in : std_logic_vector(1 downto 0)) return unsigned is
+    begin
+        case C_in is
+            when "01" => return COIN_5;    -- 5 cents [cite: 10]
+            when "10" => return COIN_10;   -- 10 cents [cite: 11]
+            when "11" => return COIN_25;   -- 25 cents [cite: 12]
+            when others => return to_unsigned(0, 8); -- 00: Nenhuma moeda [cite: 10]
+        end case;
+    end function get_coin_value;
+
+begin
+    
+    -- Conexão das saídas
+    D_out <= std_logic_vector(D_reg); -- Valor acumulado [cite: 15]
+    R_out <= R_temp;                  -- Saída de liberação [cite: 20]
+
+    -- PRÓXIMO ESTADO LÓGICA (Transições de Estado)
+    process (current_state, D_reg, Cin, S, C)
+    begin
+        next_state <= current_state; -- Estado padrão: fica no estado atual
+        R_temp <= '0';               -- Saída padrão: R=0
+        
+        case current_state is
+            
+            when WAIT_COIN =>
+                -- Lógica de transição para DEBIT_CANDY
+                if S = '1' and D_reg >= COST then
+                    next_state <= DEBIT_CANDY;
+                -- Lógica de permanência no WAIT_COIN
+                else
+                    next_state <= WAIT_COIN;
+                end if;
+                
+            when DEBIT_CANDY =>
+                -- O doce é liberado, R=1 por um ciclo [cite: 18]
+                R_temp <= '1'; 
+                -- Após liberar, volta para o estado principal para esperar próxima ação
+                next_state <= WAIT_COIN;
+            
+            when RELEASE_STATE =>
+                -- Este estado não é estritamente necessário, mas pode ser usado para 
+                -- lógicas complexas. No nosso caso, o DEBIT_CANDY faz a transição 
+                -- de volta imediatamente (Mealy-like output). 
+                -- Podemos removê-lo e deixar o DEBIT_CANDY ser o estado de saída R=1.
+                -- Mantemos a estrutura simplificada (WAIT_COIN, DEBIT_CANDY)
+                next_state <= WAIT_COIN;
+            
+        end case;
+    end process;
+    
+    -- REGISTRADOR LÓGICA (Memória e Ações no Flanco de Subida do Clock)
+    process (clk, rst)
+        variable prev_Cin : std_logic := '0'; -- Variável para detectar a *borda de subida* de Cin
+    begin
+        if rst = '1' then
+            current_state <= WAIT_COIN;
+            D_reg <= (others => '0');
+            prev_Cin := '0';
+        elsif rising_edge(clk) then
+            
+            -- 1. Transição de Estado
+            current_state <= next_state;
+            
+            -- 2. Atualização de Acumulado (Ações)
+            case next_state is 
+                
+                when WAIT_COIN =>
+                    -- Ação 1: Adicionar moeda (detecta Cin=1 e Cin anterior=0)
+                    if Cin = '1' and prev_Cin = '0' then -- Detecção de *borda de subida* (edge-triggered coin-in)
+                        D_reg <= D_reg + get_coin_value(C); -- [cite: 14]
+                    end if;
+                
+                when DEBIT_CANDY =>
+                    -- Ação 2: Deduzir o custo do doce [cite: 18]
+                    if D_reg >= COST then
+                        D_reg <= D_reg - COST;
+                    end if;
+                    
+                when others =>
+                    -- Sem ação
+                    null;
+            end case;
+
+            -- 3. Atualiza o estado anterior de Cin
+            prev_Cin := Cin;
+
+        end if;
+    end process;
+    
+end architecture Behavioral;
