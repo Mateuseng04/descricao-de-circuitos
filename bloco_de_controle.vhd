@@ -12,7 +12,7 @@ entity bloco_de_controle is
 end entity bloco_de_controle;
 
 architecture rtl of bloco_de_controle is
-    type state_type is (inicial, espera, soma, subtracao, and_op, xor_op, multiplicacao, final);
+    type state_type is (inicial, espera, final);
     signal estado_atual, proximo_estado : std_logic_vector(3 downto 0);
 begin -- processo de transicao de estados
     process(clk, reset)

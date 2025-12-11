@@ -6,7 +6,7 @@ entity ula is
     n : integer := 3
   );
   port (
-    a, b, c, d      : in unsigned(3 downto 0);      -- Entradas de 4 bits
+    a, b, c, d, e, f, g, h      : in unsigned(3 downto 0);      -- Entradas de 4 bits
     cin          : in UNSIGNED(1 downto 0);            -- Carry-in para operações aritméticas
     op           : in std_logic_vector(2 downto 0);  -- Seleção da operação
     resultado    : out UNSIGNED(3 downto 0);          -- Resultado da operação
@@ -17,7 +17,8 @@ entity ula is
     soma : in std_logic_vector (3 downto 0);
     porta_xor_result, porta_and_result : in std_logic_vector (3 downto 0);
     entrada : in std_logic_vector(3 downto 0);
-    saida : out std_logic_vector(6 downto 0)
+    saida : out std_logic_vector(6 downto 0);
+    dezena, unidade : std_logic_vector(3 downto 0)
   );
 end entity ula;
 
@@ -57,7 +58,7 @@ architecture comportamento of ula is
   signal produto : unsigned(7 downto 0);
 
   component mux
-    port (a, b, c, d, f , e: in bit_vector;
+    port (a, b, c, d, f , e, g, h: in bit_vector;
             sel1, sel2, sel3: in std_logic_vector (1 downto 0);
             dout: out bit_vector
          );
@@ -73,20 +74,23 @@ begin
 ula: process(a_temp, b_temp, c_temp, d_temp, cin, op, sel1, sel2, sel3)
   begin
     case (sel1 & sel2 & sel3) is
-        when "000" =>  -- Operação de soma
+        when "001" =>  -- Operação de soma
             resultado <= unsigned(soma);
             cout <= '0';
-        when "001" =>  -- Operação de subtração
+        when "010" =>  -- Operação de subtração
             resultado <= unsigned(resultado_subtracao);
             cout <= '0';
-        when "010" =>  -- Operação de AND
+        when "011" =>  -- Operação de AND
             saida_logica <= porta_and_result;
             cout <= '0';
-        when "011" =>  -- Operação de XOR
+        when "100" =>  -- Operação de XOR
             saida_logica <= porta_xor_result;
             cout <= '0';
-        when "100" =>  -- Operação de multiplicação
+        when "101" =>  -- Operação de multiplicação
             resultado <= produto(7 downto 0);  -- Considerando apenas os 4 bits menos significativos
+            cout <= '0';
+        when "1011" =>  -- Operação de exibição no display
+            resultado <= unsigned(entrada);
             cout <= '0';
         when others =>
             resultado <= (others => '0');
@@ -98,7 +102,6 @@ end process ula;
 display_out: process (resultado) is
     variable display_out_var : std_logic_vector(6 downto 0);
 begin
-    
     case resultado is
         when "0000" => display_out_var := "0000001"; -- 0
         when "0001" => display_out_var := "1001111"; -- 1
