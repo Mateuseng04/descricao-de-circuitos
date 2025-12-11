@@ -1,5 +1,5 @@
 Analysis & Synthesis report for projeto_final
-Thu Dec 11 08:52:02 2025
+Thu Dec 11 10:13:44 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -10,7 +10,16 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |Projeto_final|bloco_de_controle:controle_inst|estado_atual
+  9. General Register Statistics
+ 10. Port Connectivity Checks: "ula:ula_inst|multiplicador4bits:mult_inst"
+ 11. Port Connectivity Checks: "ula:ula_inst"
+ 12. Port Connectivity Checks: "bloco_de_controle:controle_inst"
+ 13. Elapsed Time Per Partition
+ 14. Analysis & Synthesis Messages
 
 
 
@@ -36,20 +45,20 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Thu Dec 11 08:52:02 2025               ;
+; Analysis & Synthesis Status        ; Successful - Thu Dec 11 10:13:44 2025           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; projeto_final                                   ;
-; Top-level Entity Name              ; projeto_final                                   ;
+; Top-level Entity Name              ; Projeto_final                                   ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; N/A until Partition Merge                       ;
-;     Total combinational functions  ; N/A until Partition Merge                       ;
-;     Dedicated logic registers      ; N/A until Partition Merge                       ;
-; Total registers                    ; N/A until Partition Merge                       ;
-; Total pins                         ; N/A until Partition Merge                       ;
-; Total virtual pins                 ; N/A until Partition Merge                       ;
-; Total memory bits                  ; N/A until Partition Merge                       ;
-; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                       ;
-; Total PLLs                         ; N/A until Partition Merge                       ;
+; Total logic elements               ; 3                                               ;
+;     Total combinational functions  ; 2                                               ;
+;     Dedicated logic registers      ; 3                                               ;
+; Total registers                    ; 3                                               ;
+; Total pins                         ; 11                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
 +------------------------------------+-------------------------------------------------+
 
 
@@ -149,17 +158,152 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                              ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                                                       ; Library ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; ula.vhd                          ; yes             ; User VHDL File  ; C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/ula.vhd                ;         ;
+; subtrator4bits.vhd               ; yes             ; User VHDL File  ; C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/subtrator4bits.vhd     ;         ;
+; somador_completo.vhd             ; yes             ; User VHDL File  ; C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/somador_completo.vhd   ;         ;
+; somador4bits.vhd                 ; yes             ; User VHDL File  ; C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/somador4bits.vhd       ;         ;
+; Projeto_final.vhdl               ; yes             ; User VHDL File  ; C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/Projeto_final.vhdl     ;         ;
+; porta_xor.vhd                    ; yes             ; User VHDL File  ; C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/porta_xor.vhd          ;         ;
+; porta_nand.vhd                   ; yes             ; User VHDL File  ; C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/porta_nand.vhd         ;         ;
+; multiplicador4bits.vhd           ; yes             ; User VHDL File  ; C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/multiplicador4bits.vhd ;         ;
+; display_7seg.vhd                 ; yes             ; User VHDL File  ; C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/display_7seg.vhd       ;         ;
+; bloco_de_controle.vhd            ; yes             ; User VHDL File  ; C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/bloco_de_controle.vhd  ;         ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 3     ;
+;                                             ;       ;
+; Total combinational functions               ; 2     ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 0     ;
+;     -- 3 input functions                    ; 1     ;
+;     -- <=2 input functions                  ; 1     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 2     ;
+;     -- arithmetic mode                      ; 0     ;
+;                                             ;       ;
+; Total registers                             ; 3     ;
+;     -- Dedicated logic registers            ; 3     ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 11    ;
+; Embedded Multiplier 9-bit elements          ; 0     ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 3     ;
+; Total fan-out                               ; 15    ;
+; Average fan-out                             ; 0.94  ;
++---------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                              ;
++--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------+--------------+
+; Compilation Hierarchy Node           ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                            ; Library Name ;
++--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------+--------------+
+; |Projeto_final                       ; 2 (0)             ; 3 (0)        ; 0           ; 0            ; 0       ; 0         ; 11   ; 0            ; |Projeto_final                                 ; work         ;
+;    |bloco_de_controle:controle_inst| ; 2 (2)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Projeto_final|bloco_de_controle:controle_inst ; work         ;
++--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------+
+; State Machine - |Projeto_final|bloco_de_controle:controle_inst|estado_atual       ;
++---------------------+---------------------+-------------------+-------------------+
+; Name                ; estado_atual.finish ; estado_atual.exec ; estado_atual.idle ;
++---------------------+---------------------+-------------------+-------------------+
+; estado_atual.idle   ; 0                   ; 0                 ; 0                 ;
+; estado_atual.exec   ; 0                   ; 1                 ; 1                 ;
+; estado_atual.finish ; 1                   ; 0                 ; 1                 ;
++---------------------+---------------------+-------------------+-------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 3     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 3     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "ula:ula_inst|multiplicador4bits:mult_inst"                                                   ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port          ; Type   ; Severity ; Details                                                                             ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+; produto[7..5] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "ula:ula_inst"                                                                               ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; a[3]         ; Input  ; Info     ; Stuck at GND                                                                        ;
+; a[2]         ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; a[1]         ; Input  ; Info     ; Stuck at GND                                                                        ;
+; a[0]         ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; b[1..0]      ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; b[3..2]      ; Input  ; Info     ; Stuck at GND                                                                        ;
+; cin          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; saida_logica ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; y            ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; cout         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; display_out  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------+
+; Port Connectivity Checks: "bloco_de_controle:controle_inst" ;
++-----------+-------+----------+------------------------------+
+; Port      ; Type  ; Severity ; Details                      ;
++-----------+-------+----------+------------------------------+
+; opcode[2] ; Input ; Info     ; Stuck at VCC                 ;
+; opcode[1] ; Input ; Info     ; Stuck at GND                 ;
+; opcode[0] ; Input ; Info     ; Stuck at VCC                 ;
++-----------+-------+----------+------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Dec 11 08:52:02 2025
+    Info: Processing started: Thu Dec 11 10:13:40 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off projeto_final -c projeto_final
 Warning (20028): Parallel compilation is not licensed and has been disabled
-Error (10500): VHDL syntax error at ula.vhd(105) near text "resultado";  expecting "begin", or a declaration statement File: C:/Users/mateu/OneDrive/Documents/Projeto de VHDL/descricao-de-circuitos-master/descricao-de-circuitos-master/projeto final/ula.vhd Line: 105
-Info (12021): Found 0 design units, including 0 entities, in source file ula.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file ula.vhd
+    Info (12022): Found design unit 1: ula-estrutural
+    Info (12023): Found entity 1: ula
 Info (12021): Found 2 design units, including 1 entities, in source file subtrator4bits.vhd
     Info (12022): Found design unit 1: subtrator4bits-comportamento
     Info (12023): Found entity 1: subtrator4bits
@@ -173,8 +317,8 @@ Info (12021): Found 2 design units, including 1 entities, in source file registr
     Info (12022): Found design unit 1: registrador4bits-comportamento
     Info (12023): Found entity 1: registrador4bits
 Info (12021): Found 2 design units, including 1 entities, in source file projeto_final.vhdl
-    Info (12022): Found design unit 1: fsm-rtl
-    Info (12023): Found entity 1: fsm
+    Info (12022): Found design unit 1: Projeto_final-comportamento
+    Info (12023): Found entity 1: Projeto_final
 Info (12021): Found 2 design units, including 1 entities, in source file porta_xor.vhd
     Info (12022): Found design unit 1: porta_xor-comportamento
     Info (12023): Found entity 1: porta_xor
@@ -197,10 +341,37 @@ Info (12021): Found 2 design units, including 1 entities, in source file display
 Info (12021): Found 2 design units, including 1 entities, in source file bloco_de_controle.vhd
     Info (12022): Found design unit 1: bloco_de_controle-rtl
     Info (12023): Found entity 1: bloco_de_controle
-Error: Quartus II 64-Bit Analysis & Synthesis was unsuccessful. 1 error, 2 warnings
-    Error: Peak virtual memory: 4631 megabytes
-    Error: Processing ended: Thu Dec 11 08:52:03 2025
-    Error: Elapsed time: 00:00:01
-    Error: Total CPU time (on all processors): 00:00:01
+Info (12127): Elaborating entity "projeto_final" for the top level hierarchy
+Warning (10873): Using initial value X (don't care) for net "leds[6..5]" at Projeto_final.vhdl(10)
+Info (12128): Elaborating entity "bloco_de_controle" for hierarchy "bloco_de_controle:controle_inst"
+Info (12128): Elaborating entity "ula" for hierarchy "ula:ula_inst"
+Warning (10541): VHDL Signal Declaration warning at ula.vhd(13): used implicit default value for signal "y" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10492): VHDL Process Statement warning at ula.vhd(158): signal "sub_borrow" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "somador4bits" for hierarchy "ula:ula_inst|somador4bits:somador_inst"
+Info (12128): Elaborating entity "somador_completo" for hierarchy "ula:ula_inst|somador4bits:somador_inst|somador_completo:Unidade1"
+Info (12128): Elaborating entity "subtrator4bits" for hierarchy "ula:ula_inst|subtrator4bits:subtrator_inst"
+Info (12128): Elaborating entity "porta_nand" for hierarchy "ula:ula_inst|porta_nand:nand_inst"
+Info (12128): Elaborating entity "porta_xor" for hierarchy "ula:ula_inst|porta_xor:xor_inst"
+Info (12128): Elaborating entity "multiplicador4bits" for hierarchy "ula:ula_inst|multiplicador4bits:mult_inst"
+Info (12128): Elaborating entity "display_7seg" for hierarchy "ula:ula_inst|display_7seg:D1"
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "leds[0]" is stuck at GND
+    Warning (13410): Pin "leds[1]" is stuck at GND
+    Warning (13410): Pin "leds[2]" is stuck at GND
+    Warning (13410): Pin "leds[3]" is stuck at GND
+    Warning (13410): Pin "leds[4]" is stuck at GND
+    Warning (13410): Pin "leds[5]" is stuck at GND
+    Warning (13410): Pin "leds[6]" is stuck at GND
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 14 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
+    Info (21059): Implemented 8 output pins
+    Info (21061): Implemented 3 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 13 warnings
+    Info: Peak virtual memory: 4645 megabytes
+    Info: Processing ended: Thu Dec 11 10:13:44 2025
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:02
 
 

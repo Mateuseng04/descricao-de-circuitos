@@ -1,0 +1,328 @@
+|projeto_final
+clk => bloco_de_controle:controle_inst.clk
+reset => bloco_de_controle:controle_inst.reset
+start => bloco_de_controle:controle_inst.start
+leds[0] <= ula:ula_inst.resultado[0]
+leds[1] <= ula:ula_inst.resultado[1]
+leds[2] <= ula:ula_inst.resultado[2]
+leds[3] <= ula:ula_inst.resultado[3]
+leds[4] <= ula:ula_inst.resultado[4]
+leds[5] <= <GND>
+leds[6] <= <GND>
+leds[7] <= bloco_de_controle:controle_inst.done
+
+
+|projeto_final|bloco_de_controle:controle_inst
+clk => estado_atual~1.DATAIN
+reset => estado_atual~3.DATAIN
+start => proximo_estado.exec.DATAB
+start => Selector0.IN2
+opcode[0] => sel3[1].DATAIN
+opcode[1] => sel1[0].DATAIN
+opcode[2] => sel1[1].DATAIN
+sel1[0] <= opcode[1].DB_MAX_OUTPUT_PORT_TYPE
+sel1[1] <= opcode[2].DB_MAX_OUTPUT_PORT_TYPE
+sel2[0] <= <GND>
+sel2[1] <= <GND>
+sel3[0] <= <GND>
+sel3[1] <= opcode[0].DB_MAX_OUTPUT_PORT_TYPE
+done <= done.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|projeto_final|ula:ula_inst
+a[0] => somador4bits:somador_inst.a[0]
+a[0] => subtrator4bits:subtrator_inst.a[0]
+a[0] => porta_nand:nand_inst.a[0]
+a[0] => porta_xor:xor_inst.a[0]
+a[0] => multiplicador4bits:mult_inst.a[0]
+a[1] => somador4bits:somador_inst.a[1]
+a[1] => subtrator4bits:subtrator_inst.a[1]
+a[1] => porta_nand:nand_inst.a[1]
+a[1] => porta_xor:xor_inst.a[1]
+a[1] => multiplicador4bits:mult_inst.a[1]
+a[2] => somador4bits:somador_inst.a[2]
+a[2] => subtrator4bits:subtrator_inst.a[2]
+a[2] => porta_nand:nand_inst.a[2]
+a[2] => porta_xor:xor_inst.a[2]
+a[2] => multiplicador4bits:mult_inst.a[2]
+a[3] => somador4bits:somador_inst.a[3]
+a[3] => subtrator4bits:subtrator_inst.a[3]
+a[3] => porta_nand:nand_inst.a[3]
+a[3] => porta_xor:xor_inst.a[3]
+a[3] => multiplicador4bits:mult_inst.a[3]
+b[0] => somador4bits:somador_inst.b[0]
+b[0] => subtrator4bits:subtrator_inst.b[0]
+b[0] => porta_nand:nand_inst.b[0]
+b[0] => porta_xor:xor_inst.b[0]
+b[0] => multiplicador4bits:mult_inst.b[0]
+b[1] => somador4bits:somador_inst.b[1]
+b[1] => subtrator4bits:subtrator_inst.b[1]
+b[1] => porta_nand:nand_inst.b[1]
+b[1] => porta_xor:xor_inst.b[1]
+b[1] => multiplicador4bits:mult_inst.b[1]
+b[2] => somador4bits:somador_inst.b[2]
+b[2] => subtrator4bits:subtrator_inst.b[2]
+b[2] => porta_nand:nand_inst.b[2]
+b[2] => porta_xor:xor_inst.b[2]
+b[2] => multiplicador4bits:mult_inst.b[2]
+b[3] => somador4bits:somador_inst.b[3]
+b[3] => subtrator4bits:subtrator_inst.b[3]
+b[3] => porta_nand:nand_inst.b[3]
+b[3] => porta_xor:xor_inst.b[3]
+b[3] => multiplicador4bits:mult_inst.b[3]
+cin => somador4bits:somador_inst.cin
+sel1[0] => Mux0.IN65
+sel1[0] => Mux1.IN65
+sel1[0] => Mux2.IN65
+sel1[0] => Mux3.IN65
+sel1[0] => Mux4.IN65
+sel1[0] => Mux5.IN65
+sel1[0] => Mux6.IN65
+sel1[0] => Mux7.IN65
+sel1[0] => Mux8.IN65
+sel1[0] => Mux9.IN65
+sel1[1] => Mux0.IN64
+sel1[1] => Mux1.IN64
+sel1[1] => Mux2.IN64
+sel1[1] => Mux3.IN64
+sel1[1] => Mux4.IN64
+sel1[1] => Mux5.IN64
+sel1[1] => Mux6.IN64
+sel1[1] => Mux7.IN64
+sel1[1] => Mux8.IN64
+sel1[1] => Mux9.IN64
+sel2[0] => Mux0.IN67
+sel2[0] => Mux1.IN67
+sel2[0] => Mux2.IN67
+sel2[0] => Mux3.IN67
+sel2[0] => Mux4.IN67
+sel2[0] => Mux5.IN67
+sel2[0] => Mux6.IN67
+sel2[0] => Mux7.IN67
+sel2[0] => Mux8.IN67
+sel2[0] => Mux9.IN67
+sel2[1] => Mux0.IN66
+sel2[1] => Mux1.IN66
+sel2[1] => Mux2.IN66
+sel2[1] => Mux3.IN66
+sel2[1] => Mux4.IN66
+sel2[1] => Mux5.IN66
+sel2[1] => Mux6.IN66
+sel2[1] => Mux7.IN66
+sel2[1] => Mux8.IN66
+sel2[1] => Mux9.IN66
+sel3[0] => Mux0.IN69
+sel3[0] => Mux1.IN69
+sel3[0] => Mux2.IN69
+sel3[0] => Mux3.IN69
+sel3[0] => Mux4.IN69
+sel3[0] => Mux5.IN69
+sel3[0] => Mux6.IN69
+sel3[0] => Mux7.IN69
+sel3[0] => Mux8.IN69
+sel3[0] => Mux9.IN69
+sel3[1] => Mux0.IN68
+sel3[1] => Mux1.IN68
+sel3[1] => Mux2.IN68
+sel3[1] => Mux3.IN68
+sel3[1] => Mux4.IN68
+sel3[1] => Mux5.IN68
+sel3[1] => Mux6.IN68
+sel3[1] => Mux7.IN68
+sel3[1] => Mux8.IN68
+sel3[1] => Mux9.IN68
+resultado[0] <= Mux4.DB_MAX_OUTPUT_PORT_TYPE
+resultado[1] <= Mux3.DB_MAX_OUTPUT_PORT_TYPE
+resultado[2] <= Mux2.DB_MAX_OUTPUT_PORT_TYPE
+resultado[3] <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
+resultado[4] <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+saida_logica[0] <= Mux9.DB_MAX_OUTPUT_PORT_TYPE
+saida_logica[1] <= Mux8.DB_MAX_OUTPUT_PORT_TYPE
+saida_logica[2] <= Mux7.DB_MAX_OUTPUT_PORT_TYPE
+saida_logica[3] <= Mux6.DB_MAX_OUTPUT_PORT_TYPE
+y[0] <= comb.DB_MAX_OUTPUT_PORT_TYPE
+y[1] <= y[1].DB_MAX_OUTPUT_PORT_TYPE
+y[2] <= y[2].DB_MAX_OUTPUT_PORT_TYPE
+y[3] <= y[3].DB_MAX_OUTPUT_PORT_TYPE
+cout <= Mux5.DB_MAX_OUTPUT_PORT_TYPE
+display_out[0] <= display_7seg:D1.seg[0]
+display_out[1] <= display_7seg:D1.seg[1]
+display_out[2] <= display_7seg:D1.seg[2]
+display_out[3] <= display_7seg:D1.seg[3]
+display_out[4] <= display_7seg:D1.seg[4]
+display_out[5] <= display_7seg:D1.seg[5]
+display_out[6] <= display_7seg:D1.seg[6]
+
+
+|projeto_final|ula:ula_inst|somador4bits:somador_inst
+a[0] => somador_completo:Unidade1.a
+a[1] => somador_completo:Unidade2.a
+a[2] => somador_completo:Unidade3.a
+a[3] => somador_completo:Unidade4.a
+b[0] => somador_completo:Unidade1.b
+b[1] => somador_completo:Unidade2.b
+b[2] => somador_completo:Unidade3.b
+b[3] => somador_completo:Unidade4.b
+cin => somador_completo:Unidade1.cin
+soma[0] <= somador_completo:Unidade1.soma
+soma[1] <= somador_completo:Unidade2.soma
+soma[2] <= somador_completo:Unidade3.soma
+soma[3] <= somador_completo:Unidade4.soma
+cout <= somador_completo:Unidade4.cout
+
+
+|projeto_final|ula:ula_inst|somador4bits:somador_inst|somador_completo:Unidade1
+a => soma.IN0
+a => cout.IN0
+b => soma.IN1
+b => cout.IN1
+cin => soma.IN1
+cin => cout.IN1
+soma <= soma.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|projeto_final|ula:ula_inst|somador4bits:somador_inst|somador_completo:Unidade2
+a => soma.IN0
+a => cout.IN0
+b => soma.IN1
+b => cout.IN1
+cin => soma.IN1
+cin => cout.IN1
+soma <= soma.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|projeto_final|ula:ula_inst|somador4bits:somador_inst|somador_completo:Unidade3
+a => soma.IN0
+a => cout.IN0
+b => soma.IN1
+b => cout.IN1
+cin => soma.IN1
+cin => cout.IN1
+soma <= soma.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|projeto_final|ula:ula_inst|somador4bits:somador_inst|somador_completo:Unidade4
+a => soma.IN0
+a => cout.IN0
+b => soma.IN1
+b => cout.IN1
+cin => soma.IN1
+cin => cout.IN1
+soma <= soma.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|projeto_final|ula:ula_inst|subtrator4bits:subtrator_inst
+a[0] => Add0.IN10
+a[0] => LessThan0.IN4
+a[1] => Add0.IN9
+a[1] => LessThan0.IN3
+a[2] => Add0.IN8
+a[2] => LessThan0.IN2
+a[3] => Add0.IN7
+a[3] => LessThan0.IN1
+b[0] => LessThan0.IN8
+b[0] => Add0.IN6
+b[1] => LessThan0.IN7
+b[1] => Add0.IN5
+b[2] => LessThan0.IN6
+b[2] => Add0.IN4
+b[3] => LessThan0.IN5
+b[3] => Add0.IN3
+resultado[0] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+resultado[1] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+resultado[2] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+resultado[3] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+borrow <= LessThan0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|projeto_final|ula:ula_inst|porta_nand:nand_inst
+a[0] => y.IN0
+a[1] => y.IN0
+a[2] => y.IN0
+a[3] => y.IN0
+b[0] => y.IN1
+b[1] => y.IN1
+b[2] => y.IN1
+b[3] => y.IN1
+y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[3] <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|projeto_final|ula:ula_inst|porta_xor:xor_inst
+a[0] => y.IN0
+a[1] => y.IN0
+a[2] => y.IN0
+a[3] => y.IN0
+b[0] => y.IN1
+b[1] => y.IN1
+b[2] => y.IN1
+b[3] => y.IN1
+y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[3] <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|projeto_final|ula:ula_inst|multiplicador4bits:mult_inst
+a[0] => Mult0.IN3
+a[1] => Mult0.IN2
+a[2] => Mult0.IN1
+a[3] => Mult0.IN0
+b[0] => Mult0.IN7
+b[1] => Mult0.IN6
+b[2] => Mult0.IN5
+b[3] => Mult0.IN4
+produto[0] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+produto[1] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+produto[2] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+produto[3] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+produto[4] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+produto[5] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+produto[6] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+produto[7] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|projeto_final|ula:ula_inst|display_7seg:D1
+num[0] => Mux0.IN19
+num[0] => Mux1.IN19
+num[0] => Mux2.IN19
+num[0] => Mux3.IN19
+num[0] => Mux4.IN19
+num[0] => Mux5.IN19
+num[0] => Mux6.IN19
+num[1] => Mux0.IN18
+num[1] => Mux1.IN18
+num[1] => Mux2.IN18
+num[1] => Mux3.IN18
+num[1] => Mux4.IN18
+num[1] => Mux5.IN18
+num[1] => Mux6.IN18
+num[2] => Mux0.IN17
+num[2] => Mux1.IN17
+num[2] => Mux2.IN17
+num[2] => Mux3.IN17
+num[2] => Mux4.IN17
+num[2] => Mux5.IN17
+num[2] => Mux6.IN17
+num[3] => Mux0.IN16
+num[3] => Mux1.IN16
+num[3] => Mux2.IN16
+num[3] => Mux3.IN16
+num[3] => Mux4.IN16
+num[3] => Mux5.IN16
+num[3] => Mux6.IN16
+seg[0] <= Mux6.DB_MAX_OUTPUT_PORT_TYPE
+seg[1] <= Mux5.DB_MAX_OUTPUT_PORT_TYPE
+seg[2] <= Mux4.DB_MAX_OUTPUT_PORT_TYPE
+seg[3] <= Mux3.DB_MAX_OUTPUT_PORT_TYPE
+seg[4] <= Mux2.DB_MAX_OUTPUT_PORT_TYPE
+seg[5] <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
+seg[6] <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+
+

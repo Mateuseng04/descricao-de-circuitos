@@ -9,8 +9,8 @@ entity ula is
 
     sel1, sel2, sel3 : in std_logic_vector(1 downto 0);
 
-    resultado    : out unsigned(4 downto 0);
-    saida_logica : out std_logic_vector(3 downto 0);
+    resultado     : out unsigned(4 downto 0);
+    saida_logica, y : out std_logic_vector(3 downto 0);
     cout         : out std_logic;
 
     display_out  : out std_logic_vector(6 downto 0)
@@ -35,13 +35,13 @@ architecture estrutural of ula is
 
   component subtrator4bits is
     port (
-      x, y        : in unsigned(3 downto 0);
+      a, b        : in unsigned(3 downto 0);
       resultado   : out unsigned(3 downto 0);
       borrow      : out std_logic
     );
   end component;
 
-  component porta_and is
+  component porta_nand is
     port (
       a, b : in unsigned(3 downto 0);
       y    : out unsigned(3 downto 0)
@@ -61,9 +61,9 @@ architecture estrutural of ula is
       produto : out unsigned(7 downto 0)
     );
   end component;
-component display7seg
+component display_7seg
         port (
-            bin : in  std_logic_vector(3 downto 0);
+            num : in  std_logic_vector(3 downto 0);
             seg : out std_logic_vector(6 downto 0)
         );
     end component;
@@ -78,14 +78,16 @@ component display7seg
   signal sub_r      : unsigned(3 downto 0);
   signal sub_borrow : std_logic;
 
-  signal and_r      : unsigned(3 downto 0);
+  signal nand_r      : unsigned(3 downto 0);
   signal xor_r      : unsigned(3 downto 0);
   signal mult_r     : unsigned(7 downto 0);
+  signal resultado_s : unsigned (4 downto 0);
 
   signal op_sel     : std_logic_vector(5 downto 0);
-  signal resultado_int : STD_LOGIC_VECTOR(4 downto 0);
+  -- signal resultado_int : unsigned(4 downto 0);
 
 begin
+  resultado <= resultado_s;
 
 
   --------------------------------------------------------------------
@@ -103,17 +105,17 @@ begin
 
   subtrator_inst : subtrator4bits
     port map(
-      x        => a,
-      y        => b,
+      a        => a,
+      b        => b,
       resultado => sub_r,
       borrow   => sub_borrow
     );
 
-  and_inst : porta_and
+  nand_inst : porta_nand
     port map(
       a => a,
       b => b,
-      y => and_r
+      y => nand_r
     );
 
   xor_inst : porta_xor
@@ -137,9 +139,9 @@ begin
   op_sel <= sel1 & sel2 & sel3;  -- 6 bits (2+2+2)
 
 
-  process(op_sel, soma_r, soma_cout, sub_r, and_r, xor_r, mult_r)
+  process(op_sel, soma_r, soma_cout, sub_r, nand_r, xor_r, mult_r)
   begin
-    resultado    <= (others => '0');
+    resultado_s    <= (others => '0');
     saida_logica <= (others => '0');
     cout         <= '0';
 
@@ -147,17 +149,17 @@ begin
 
       -- SOMA
       when "000001" =>
-        resultado <= ('0' & soma_r);
+        resultado_s <= ('0' & soma_r);
         cout      <= soma_cout;
 
       -- SUBTRAÇÃO
       when "000010" =>
-        resultado <= ('0' & sub_r);
+        resultado_s <= ('0' & sub_r);
         cout      <= sub_borrow;
 
       -- AND
       when "000011" =>
-        saida_logica <= std_logic_vector(and_r);
+        saida_logica <= std_logic_vector(nand_r);
 
       -- XOR
       when "000100" =>
@@ -165,7 +167,7 @@ begin
 
       -- MULTIPLICAÇÃO (LSB)
       when "000101" =>
-        resultado <= mult_r(4 downto 0);
+        resultado_s <= mult_r(4 downto 0);
 
       when others =>
         null;
@@ -176,9 +178,9 @@ begin
   --------------------------------------------------------------------
   -- DISPLAY DE 7 SEGMENTOS
   --------------------------------------------------------------------
-  D1: display7seg
+  D1: display_7seg
         port map (
-            bin => STD_LOGIC_VECTOR(resultado),
+            num => std_logic_vector(resultado_s(3 downto 0)),
             seg => display_out       -- saída do display da ULA
         );
 
