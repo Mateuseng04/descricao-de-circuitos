@@ -1,122 +1,193 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
 entity ula is
-  generic (
-    n : integer := 3
-  );
   port (
-    a, b, c, d, e, f, g, h      : in unsigned(3 downto 0);      -- Entradas de 4 bits
-    cin          : in UNSIGNED(1 downto 0);            -- Carry-in para operações aritméticas
-    op           : in std_logic_vector(2 downto 0);  -- Seleção da operação
-    resultado    : out UNSIGNED(3 downto 0);          -- Resultado da operação
-    saida_logica : out std_logic_vector(3 downto 0);  -- Resultado das operações lógicas
-    cout         : out std_logic;            -- Carry-out para operações aritméticas
-    display  : out std_logic_vector(6 downto 0);  -- Saída para display de 7 segmentos
-    sel1, sel2, sel3 : in std_logic_vector (1 downto 0);
-    soma : in std_logic_vector (3 downto 0);
-    porta_xor_result, porta_and_result : in std_logic_vector (3 downto 0);
-    entrada : in std_logic_vector(3 downto 0);
-    saida : out std_logic_vector(6 downto 0);
-    dezena, unidade : std_logic_vector(3 downto 0)
+    a, b  : in unsigned(3 downto 0);
+    cin   : in std_logic;
+
+    sel1, sel2, sel3 : in std_logic_vector(1 downto 0);
+
+    resultado    : out unsigned(4 downto 0);
+    saida_logica : out std_logic_vector(3 downto 0);
+    cout         : out std_logic;
+
+    display      : out std_logic_vector(6 downto 0)
   );
 end entity ula;
 
-architecture comportamento of ula is
-  signal a_temp, b_temp, c_temp, d_temp,resultado_temp : unsigned(4 downto 0);
-  component porta_xor
-    port (a, b: in std_logic_vector (3 downto 0);
-          y: out std_logic_vector (3 downto 0)
-         );
-  end component;
-  component porta_and
-    port (a, b: in std_logic_vector (3 downto 0);
-          y: out std_logic_vector (3 downto 0)
-         );
-  end component;
-  component somador4bits
-    port (a, b: in std_logic_vector (3 downto 0);
-          cin: in std_logic;
-          soma: out std_logic_vector (3 downto 0);
-          cout: out std_logic
-         );
-  end component;
-  component subtrator4bits
-    port (a, b: in std_logic_vector (3 downto 0);
-          resultado_subtracao: out std_logic_vector (3 downto 0);
-          borrow: out std_logic
-         );
-  end component;
-  component multiplicador4bits
+
+architecture estrutural of ula is
+
+  --------------------------------------------------------------------
+  -- DECLARAÇÃO DOS COMPONENTES EXTERNOS
+  --------------------------------------------------------------------
+
+  component somador4bits is
     port (
-        a, b : in unsigned(3 downto 0);  -- Entradas de 4 bits
-        produto : out unsigned(7 downto 0) -- Produto de 8 bits
+      a, b   : in unsigned(3 downto 0);
+      cin    : in std_logic;
+      soma   : out unsigned(3 downto 0);
+      cout   : out std_logic
     );
   end component;
-  signal resultado_soma, resultado_subtracao : std_logic_vector(3 downto 0);
-  signal borrow : std_logic;
-  signal produto : unsigned(7 downto 0);
 
-  component mux
-    port (a, b, c, d, f , e, g, h: in bit_vector;
-            sel1, sel2, sel3: in std_logic_vector (1 downto 0);
-            dout: out bit_vector
-         );
+  component subtrator4bits is
+    port (
+      x, y        : in unsigned(3 downto 0);
+      resultado   : out unsigned(3 downto 0);
+      borrow      : out std_logic
+    );
   end component;
-  component display7seg
-    port (entrada: in std_logic_vector(3 downto 0);
-          saida: out std_logic_vector(6 downto 0)
-         );
+
+  component porta_and is
+    port (
+      a, b : in unsigned(3 downto 0);
+      y    : out unsigned(3 downto 0)
+    );
   end component;
+
+  component porta_xor is
+    port (
+      a, b : in unsigned(3 downto 0);
+      y    : out unsigned(3 downto 0)
+    );
+  end component;
+
+  component multiplicador4bits is
+    port (
+      a, b    : in unsigned(3 downto 0);
+      produto : out unsigned(7 downto 0)
+    );
+  end component;
+
+
+  --------------------------------------------------------------------
+  -- SINAIS INTERNOS
+  --------------------------------------------------------------------
+
+  signal soma_r     : unsigned(3 downto 0);
+  signal soma_cout  : std_logic;
+
+  signal sub_r      : unsigned(3 downto 0);
+  signal sub_borrow : std_logic;
+
+  signal and_r      : unsigned(3 downto 0);
+  signal xor_r      : unsigned(3 downto 0);
+  signal mult_r     : unsigned(7 downto 0);
+
+  signal op_sel     : std_logic_vector(5 downto 0);
 
 begin
 
-ula: process(a_temp, b_temp, c_temp, d_temp, cin, op, sel1, sel2, sel3)
+
+  --------------------------------------------------------------------
+  -- INSTÂNCIAS DOS MÓDULOS
+  --------------------------------------------------------------------
+
+  somador_inst : somador4bits
+    port map(
+      a      => a,
+      b      => b,
+      cin    => cin,
+      soma   => soma_r,
+      cout   => soma_cout
+    );
+
+  subtrator_inst : subtrator4bits
+    port map(
+      x        => a,
+      y        => b,
+      resultado => sub_r,
+      borrow   => sub_borrow
+    );
+
+  and_inst : porta_and
+    port map(
+      a => a,
+      b => b,
+      y => and_r
+    );
+
+  xor_inst : porta_xor
+    port map(
+      a => a,
+      b => b,
+      y => xor_r
+    );
+
+  mult_inst : multiplicador4bits
+    port map(
+      a => a,
+      b => b,
+      produto => mult_r
+    );
+
+
+  --------------------------------------------------------------------
+  -- SELETOR DE OPERAÇÕES
+  --------------------------------------------------------------------
+  op_sel <= sel1 & sel2 & sel3;  -- 6 bits (2+2+2)
+
+
+  process(op_sel, soma_r, soma_cout, sub_r, and_r, xor_r, mult_r)
   begin
-    case (sel1 & sel2 & sel3) is
-        when "001" =>  -- Operação de soma
-            resultado <= unsigned(soma);
-            cout <= '0';
-        when "010" =>  -- Operação de subtração
-            resultado <= unsigned(resultado_subtracao);
-            cout <= '0';
-        when "011" =>  -- Operação de AND
-            saida_logica <= porta_and_result;
-            cout <= '0';
-        when "100" =>  -- Operação de XOR
-            saida_logica <= porta_xor_result;
-            cout <= '0';
-        when "101" =>  -- Operação de multiplicação
-            resultado <= produto(7 downto 0);  -- Considerando apenas os 4 bits menos significativos
-            cout <= '0';
-        when "1011" =>  -- Operação de exibição no display
-            resultado <= unsigned(entrada);
-            cout <= '0';
-        when others =>
-            resultado <= (others => '0');
-            cout <= '0';
+    resultado    <= (others => '0');
+    saida_logica <= (others => '0');
+    cout         <= '0';
+
+    case op_sel is
+
+      -- SOMA
+      when "000001" =>
+        resultado <= ('0' & soma_r);
+        cout      <= soma_cout;
+
+      -- SUBTRAÇÃO
+      when "000010" =>
+        resultado <= ('0' & sub_r);
+        cout      <= sub_borrow;
+
+      -- AND
+      when "000011" =>
+        saida_logica <= std_logic_vector(and_r);
+
+      -- XOR
+      when "000100" =>
+        saida_logica <= std_logic_vector(xor_r);
+
+      -- MULTIPLICAÇÃO (LSB)
+      when "000101" =>
+        resultado <= mult_r(4 downto 0);
+
+      when others =>
+        null;
     end case;
-end process ula;
+  end process;
 
 
-display_out: process (resultado) is
-    variable display_out_var : std_logic_vector(6 downto 0);
-begin
-    case resultado is
-        when "0000" => display_out_var := "0000001"; -- 0
-        when "0001" => display_out_var := "1001111"; -- 1
-        when "0010" => display_out_var := "0010010"; -- 2
-        when "0011" => display_out_var := "0000110"; -- 3
-        when "0100" => display_out_var := "1001100"; -- 4
-        when "0101" => display_out_var := "0100100"; -- 5
-        when "0110" => display_out_var := "0100000"; -- 6
-        when "0111" => display_out_var := "0001111"; -- 7
-        when "1000" => display_out_var := "0000000"; -- 8
-        when "1001" => display_out_var := "0000100"; -- 9
-        when others => display_out_var := "1111111"; -- off
+  --------------------------------------------------------------------
+  -- DISPLAY DE 7 SEGMENTOS
+  --------------------------------------------------------------------
+  process(resultado)
+    variable r4 : std_logic_vector(3 downto 0);
+  begin
+    r4 := std_logic_vector(resultado(3 downto 0));
+
+    case r4 is
+      when "0000" => display <= "0000001"; --0
+      when "0001" => display <= "1001111"; --1
+      when "0010" => display <= "0010010"; --2
+      when "0011" => display <= "0000110"; --3
+      when "0100" => display <= "1001100"; --4
+      when "0101" => display <= "0100100"; --5
+      when "0110" => display <= "0100000"; --6
+      when "0111" => display <= "0001111"; --7
+      when "1000" => display <= "0000000"; --8
+      when "1001" => display <= "0000100"; --9
+      when others => display <= "1111111";
     end case;
-    display <= display_out_var;
-    saida <= display_out_var;
-end process display_out;
+  end process;
 
-end architecture comportamento;
+end architecture estrutural;
