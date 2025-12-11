@@ -13,7 +13,7 @@ entity ula is
     saida_logica : out std_logic_vector(3 downto 0);
     cout         : out std_logic;
 
-    display      : out std_logic_vector(6 downto 0)
+    display_out  : out std_logic_vector(6 downto 0)
   );
 end entity ula;
 
@@ -61,7 +61,12 @@ architecture estrutural of ula is
       produto : out unsigned(7 downto 0)
     );
   end component;
-
+component display7seg
+        port (
+            bin : in  std_logic_vector(3 downto 0);
+            seg : out std_logic_vector(6 downto 0)
+        );
+    end component;
 
   --------------------------------------------------------------------
   -- SINAIS INTERNOS
@@ -78,6 +83,7 @@ architecture estrutural of ula is
   signal mult_r     : unsigned(7 downto 0);
 
   signal op_sel     : std_logic_vector(5 downto 0);
+  signal resultado_int : STD_LOGIC_VECTOR(4 downto 0);
 
 begin
 
@@ -170,24 +176,10 @@ begin
   --------------------------------------------------------------------
   -- DISPLAY DE 7 SEGMENTOS
   --------------------------------------------------------------------
-  process(resultado)
-    variable r4 : std_logic_vector(3 downto 0);
-  begin
-    r4 := std_logic_vector(resultado(3 downto 0));
-
-    case r4 is
-      when "0000" => display <= "0000001"; --0
-      when "0001" => display <= "1001111"; --1
-      when "0010" => display <= "0010010"; --2
-      when "0011" => display <= "0000110"; --3
-      when "0100" => display <= "1001100"; --4
-      when "0101" => display <= "0100100"; --5
-      when "0110" => display <= "0100000"; --6
-      when "0111" => display <= "0001111"; --7
-      when "1000" => display <= "0000000"; --8
-      when "1001" => display <= "0000100"; --9
-      when others => display <= "1111111";
-    end case;
-  end process;
+  D1: display7seg
+        port map (
+            bin => STD_LOGIC_VECTOR(resultado),
+            seg => display_out       -- saída do display da ULA
+        );
 
 end architecture estrutural;
