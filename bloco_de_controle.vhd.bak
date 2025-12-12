@@ -160,7 +160,7 @@
         op_reg <= op_s;
 
         --------------------------------------------------------------------
-        -- SELETORES DA ULA
+        -- SELETORES DA ULA → mapeados como no seu código original
         --------------------------------------------------------------------
         sel1 <= opcode(2 downto 1);
         sel2 <= "00";

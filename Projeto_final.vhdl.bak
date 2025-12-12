@@ -8,8 +8,7 @@ entity Projeto_final is
         reset  : in std_logic;
         start  : in std_logic;
         leds   : out std_logic_vector(7 downto 0);
-        numero : in STD_LOGIC_VECTOR (3 downto 0);
-		  opcode : in std_logic_vector (2 downto 0)
+        numero : in STD_LOGIC_VECTOR (3 downto 0)
     );
 end entity;
 
@@ -26,7 +25,7 @@ begin
             clk    => clk,
             reset  => reset,
             start  => start,
-            opcode => opcode,   -- exemplo
+            opcode => "101",   -- exemplo
             sel1   => sel1_s,
             sel2   => sel2_s,
             sel3   => sel3_s,
