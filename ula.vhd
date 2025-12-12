@@ -55,7 +55,7 @@ architecture estrutural of ula is
         port (
             num       : in  std_logic_vector(3 downto 0);
             seg_unid  : out std_logic_vector(6 downto 0);
-            seg_dez   : out std_logic_vector(6 downto 0)
+            seg_dezenas   : out std_logic_vector(6 downto 0)
         );
   end component;
 
@@ -147,7 +147,7 @@ begin
     port map (
       num      => std_logic_vector(resultado_s(3 downto 0)),
       seg_unid => disp_unid,
-      seg_dez  => disp_dez
+      seg_dezenas  => disp_dez
     );
 
 end architecture;
