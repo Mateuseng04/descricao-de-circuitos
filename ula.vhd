@@ -64,7 +64,8 @@ architecture estrutural of ula is
 component display_7seg
         port (
             num : in  std_logic_vector(3 downto 0);
-            seg : out std_logic_vector(6 downto 0)
+            seg_unid : out std_logic_vector(6 downto 0);
+				seg_dezenas: out std_logic_vector (6 downto 0)
         );
     end component;
 
@@ -181,7 +182,8 @@ begin
   D1: display_7seg
         port map (
             num => std_logic_vector(resultado_s(3 downto 0)),
-            seg => display_out       -- saída do display da ULA
+            seg_unid => display_out,       -- saída do display da ULA
+				seg_dezenas => display_out
         );
 
 end architecture estrutural;

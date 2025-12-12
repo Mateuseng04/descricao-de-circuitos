@@ -1,5 +1,5 @@
 Analysis & Synthesis report for projeto_final
-Thu Dec 11 10:13:44 2025
+Fri Dec 12 09:40:32 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -45,16 +45,16 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Dec 11 10:13:44 2025           ;
+; Analysis & Synthesis Status        ; Successful - Fri Dec 12 09:40:32 2025           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; projeto_final                                   ;
 ; Top-level Entity Name              ; Projeto_final                                   ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 3                                               ;
-;     Total combinational functions  ; 2                                               ;
-;     Dedicated logic registers      ; 3                                               ;
-; Total registers                    ; 3                                               ;
-; Total pins                         ; 11                                              ;
+; Total logic elements               ; 7                                               ;
+;     Total combinational functions  ; 7                                               ;
+;     Dedicated logic registers      ; 7                                               ;
+; Total registers                    ; 7                                               ;
+; Total pins                         ; 15                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
@@ -181,28 +181,28 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 3     ;
+; Estimated Total logic elements              ; 7     ;
 ;                                             ;       ;
-; Total combinational functions               ; 2     ;
+; Total combinational functions               ; 7     ;
 ; Logic element usage by number of LUT inputs ;       ;
 ;     -- 4 input functions                    ; 0     ;
-;     -- 3 input functions                    ; 1     ;
-;     -- <=2 input functions                  ; 1     ;
+;     -- 3 input functions                    ; 7     ;
+;     -- <=2 input functions                  ; 0     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 2     ;
+;     -- normal mode                          ; 7     ;
 ;     -- arithmetic mode                      ; 0     ;
 ;                                             ;       ;
-; Total registers                             ; 3     ;
-;     -- Dedicated logic registers            ; 3     ;
+; Total registers                             ; 7     ;
+;     -- Dedicated logic registers            ; 7     ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
-; I/O pins                                    ; 11    ;
+; I/O pins                                    ; 15    ;
 ; Embedded Multiplier 9-bit elements          ; 0     ;
-; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 3     ;
-; Total fan-out                               ; 15    ;
-; Average fan-out                             ; 0.94  ;
+; Maximum fan-out node                        ; start ;
+; Maximum fan-out                             ; 7     ;
+; Total fan-out                               ; 43    ;
+; Average fan-out                             ; 1.48  ;
 +---------------------------------------------+-------+
 
 
@@ -211,22 +211,26 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------+--------------+
 ; Compilation Hierarchy Node           ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                            ; Library Name ;
 +--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------+--------------+
-; |Projeto_final                       ; 2 (0)             ; 3 (0)        ; 0           ; 0            ; 0       ; 0         ; 11   ; 0            ; |Projeto_final                                 ; work         ;
-;    |bloco_de_controle:controle_inst| ; 2 (2)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Projeto_final|bloco_de_controle:controle_inst ; work         ;
+; |Projeto_final                       ; 7 (0)             ; 7 (0)        ; 0           ; 0            ; 0       ; 0         ; 15   ; 0            ; |Projeto_final                                 ; work         ;
+;    |bloco_de_controle:controle_inst| ; 7 (7)             ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Projeto_final|bloco_de_controle:controle_inst ; work         ;
 +--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
-+-----------------------------------------------------------------------------------+
-; State Machine - |Projeto_final|bloco_de_controle:controle_inst|estado_atual       ;
-+---------------------+---------------------+-------------------+-------------------+
-; Name                ; estado_atual.finish ; estado_atual.exec ; estado_atual.idle ;
-+---------------------+---------------------+-------------------+-------------------+
-; estado_atual.idle   ; 0                   ; 0                 ; 0                 ;
-; estado_atual.exec   ; 0                   ; 1                 ; 1                 ;
-; estado_atual.finish ; 1                   ; 0                 ; 1                 ;
-+---------------------+---------------------+-------------------+-------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Projeto_final|bloco_de_controle:controle_inst|estado_atual                                                                                                            ;
++------------------------+------------------------+---------------------+----------------------+-----------------------+-----------------------+---------------------+-------------------+
+; Name                   ; estado_atual.resetando ; estado_atual.mostra ; estado_atual.executa ; estado_atual.digita_B ; estado_atual.digita_A ; estado_atual.sel_op ; estado_atual.idle ;
++------------------------+------------------------+---------------------+----------------------+-----------------------+-----------------------+---------------------+-------------------+
+; estado_atual.idle      ; 0                      ; 0                   ; 0                    ; 0                     ; 0                     ; 0                   ; 0                 ;
+; estado_atual.sel_op    ; 0                      ; 0                   ; 0                    ; 0                     ; 0                     ; 1                   ; 1                 ;
+; estado_atual.digita_A  ; 0                      ; 0                   ; 0                    ; 0                     ; 1                     ; 0                   ; 1                 ;
+; estado_atual.digita_B  ; 0                      ; 0                   ; 0                    ; 1                     ; 0                     ; 0                   ; 1                 ;
+; estado_atual.executa   ; 0                      ; 0                   ; 1                    ; 0                     ; 0                     ; 0                   ; 1                 ;
+; estado_atual.mostra    ; 0                      ; 1                   ; 0                    ; 0                     ; 0                     ; 0                   ; 1                 ;
+; estado_atual.resetando ; 1                      ; 0                   ; 0                    ; 0                     ; 0                     ; 0                   ; 1                 ;
++------------------------+------------------------+---------------------+----------------------+-----------------------+-----------------------+---------------------+-------------------+
 
 
 +------------------------------------------------------+
@@ -234,10 +238,10 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 3     ;
+; Total registers                              ; 7     ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 3     ;
+; Number of registers using Asynchronous Clear ; 7     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
@@ -272,15 +276,19 @@ Encoding Type:  One-Hot
 +--------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+-------------------------------------------------------------+
-; Port Connectivity Checks: "bloco_de_controle:controle_inst" ;
-+-----------+-------+----------+------------------------------+
-; Port      ; Type  ; Severity ; Details                      ;
-+-----------+-------+----------+------------------------------+
-; opcode[2] ; Input ; Info     ; Stuck at VCC                 ;
-; opcode[1] ; Input ; Info     ; Stuck at GND                 ;
-; opcode[0] ; Input ; Info     ; Stuck at VCC                 ;
-+-----------+-------+----------+------------------------------+
++----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "bloco_de_controle:controle_inst"                                                          ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                             ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; opcode[2]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; opcode[1]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; opcode[0]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; a_reg      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; b_reg      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; op_reg     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; estado_dbg ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +-------------------------------+
@@ -298,7 +306,7 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Dec 11 10:13:40 2025
+    Info: Processing started: Fri Dec 12 09:40:28 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off projeto_final -c projeto_final
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file ula.vhd
@@ -346,7 +354,7 @@ Warning (10873): Using initial value X (don't care) for net "leds[6..5]" at Proj
 Info (12128): Elaborating entity "bloco_de_controle" for hierarchy "bloco_de_controle:controle_inst"
 Info (12128): Elaborating entity "ula" for hierarchy "ula:ula_inst"
 Warning (10541): VHDL Signal Declaration warning at ula.vhd(13): used implicit default value for signal "y" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10492): VHDL Process Statement warning at ula.vhd(158): signal "sub_borrow" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ula.vhd(159): signal "sub_borrow" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Info (12128): Elaborating entity "somador4bits" for hierarchy "ula:ula_inst|somador4bits:somador_inst"
 Info (12128): Elaborating entity "somador_completo" for hierarchy "ula:ula_inst|somador4bits:somador_inst|somador_completo:Unidade1"
 Info (12128): Elaborating entity "subtrator4bits" for hierarchy "ula:ula_inst|subtrator4bits:subtrator_inst"
@@ -364,13 +372,18 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "leds[6]" is stuck at GND
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 14 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 3 input pins
+Warning (21074): Design contains 4 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "numero[0]"
+    Warning (15610): No output dependent on input pin "numero[1]"
+    Warning (15610): No output dependent on input pin "numero[2]"
+    Warning (15610): No output dependent on input pin "numero[3]"
+Info (21057): Implemented 22 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 7 input pins
     Info (21059): Implemented 8 output pins
-    Info (21061): Implemented 3 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 13 warnings
-    Info: Peak virtual memory: 4645 megabytes
-    Info: Processing ended: Thu Dec 11 10:13:44 2025
+    Info (21061): Implemented 7 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 18 warnings
+    Info: Peak virtual memory: 4644 megabytes
+    Info: Processing ended: Fri Dec 12 09:40:32 2025
     Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:02
 

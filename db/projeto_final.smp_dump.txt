@@ -1,6 +1,10 @@
 
 State Machine - |Projeto_final|bloco_de_controle:controle_inst|estado_atual
-Name estado_atual.finish estado_atual.exec estado_atual.idle 
-estado_atual.idle 0 0 0 
-estado_atual.exec 0 1 1 
-estado_atual.finish 1 0 1 
+Name estado_atual.resetando estado_atual.mostra estado_atual.executa estado_atual.digita_B estado_atual.digita_A estado_atual.sel_op estado_atual.idle 
+estado_atual.idle 0 0 0 0 0 0 0 
+estado_atual.sel_op 0 0 0 0 0 1 1 
+estado_atual.digita_A 0 0 0 0 1 0 1 
+estado_atual.digita_B 0 0 0 1 0 0 1 
+estado_atual.executa 0 0 1 0 0 0 1 
+estado_atual.mostra 0 1 0 0 0 0 1 
+estado_atual.resetando 1 0 0 0 0 0 1 

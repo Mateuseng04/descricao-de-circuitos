@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for projeto_final
-Thu Dec 11 10:14:03 2025
+Fri Dec 12 09:40:49 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -101,13 +101,13 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
 
 
-+-----------------------------------------------------------------------------------------------------------+
-; Slow Model Fmax Summary                                                                                   ;
-+------------+-----------------+------------+---------------------------------------------------------------+
-; Fmax       ; Restricted Fmax ; Clock Name ; Note                                                          ;
-+------------+-----------------+------------+---------------------------------------------------------------+
-; 1324.5 MHz ; 420.17 MHz      ; clk        ; limit due to minimum period restriction (max I/O toggle rate) ;
-+------------+-----------------+------------+---------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------+
+; Slow Model Fmax Summary                                                                                    ;
++-------------+-----------------+------------+---------------------------------------------------------------+
+; Fmax        ; Restricted Fmax ; Clock Name ; Note                                                          ;
++-------------+-----------------+------------+---------------------------------------------------------------+
+; 1068.38 MHz ; 420.17 MHz      ; clk        ; limit due to minimum period restriction (max I/O toggle rate) ;
++-------------+-----------------+------------+---------------------------------------------------------------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
@@ -116,7 +116,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+-------+---------------+
 ; Clock ; Slack ; End Point TNS ;
 +-------+-------+---------------+
-; clk   ; 0.245 ; 0.000         ;
+; clk   ; 0.064 ; 0.000         ;
 +-------+-------+---------------+
 
 
@@ -146,77 +146,113 @@ No paths to report.
 +-------+--------+-----------------------+
 ; Clock ; Slack  ; End Point TNS         ;
 +-------+--------+-----------------------+
-; clk   ; -1.380 ; -4.380                ;
+; clk   ; -1.380 ; -8.380                ;
 +-------+--------+-----------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Slow Model Setup: 'clk'                                                                                                                                                                 ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node                                           ; To Node                                             ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; 0.245 ; bloco_de_controle:controle_inst|estado_atual.finish ; bloco_de_controle:controle_inst|estado_atual.idle   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.791      ;
-; 0.253 ; bloco_de_controle:controle_inst|estado_atual.idle   ; bloco_de_controle:controle_inst|estado_atual.exec   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.783      ;
-; 0.258 ; bloco_de_controle:controle_inst|estado_atual.exec   ; bloco_de_controle:controle_inst|estado_atual.finish ; clk          ; clk         ; 1.000        ; 0.000      ; 0.778      ;
-; 0.379 ; bloco_de_controle:controle_inst|estado_atual.idle   ; bloco_de_controle:controle_inst|estado_atual.idle   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.657      ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Setup: 'clk'                                                                                                                                                                       ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                                              ; To Node                                                ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.064 ; bloco_de_controle:controle_inst|estado_atual.mostra    ; bloco_de_controle:controle_inst|estado_atual.resetando ; clk          ; clk         ; 1.000        ; 0.000      ; 0.972      ;
+; 0.219 ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; clk          ; clk         ; 1.000        ; 0.000      ; 0.817      ;
+; 0.248 ; bloco_de_controle:controle_inst|estado_atual.executa   ; bloco_de_controle:controle_inst|estado_atual.mostra    ; clk          ; clk         ; 1.000        ; 0.000      ; 0.788      ;
+; 0.250 ; bloco_de_controle:controle_inst|estado_atual.resetando ; bloco_de_controle:controle_inst|estado_atual.idle      ; clk          ; clk         ; 1.000        ; 0.000      ; 0.786      ;
+; 0.250 ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; clk          ; clk         ; 1.000        ; 0.000      ; 0.786      ;
+; 0.253 ; bloco_de_controle:controle_inst|estado_atual.idle      ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; clk          ; clk         ; 1.000        ; 0.000      ; 0.783      ;
+; 0.253 ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; bloco_de_controle:controle_inst|estado_atual.executa   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.783      ;
+; 0.379 ; bloco_de_controle:controle_inst|estado_atual.resetando ; bloco_de_controle:controle_inst|estado_atual.resetando ; clk          ; clk         ; 1.000        ; 0.000      ; 0.657      ;
+; 0.379 ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; clk          ; clk         ; 1.000        ; 0.000      ; 0.657      ;
+; 0.379 ; bloco_de_controle:controle_inst|estado_atual.mostra    ; bloco_de_controle:controle_inst|estado_atual.mostra    ; clk          ; clk         ; 1.000        ; 0.000      ; 0.657      ;
+; 0.379 ; bloco_de_controle:controle_inst|estado_atual.idle      ; bloco_de_controle:controle_inst|estado_atual.idle      ; clk          ; clk         ; 1.000        ; 0.000      ; 0.657      ;
+; 0.379 ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; clk          ; clk         ; 1.000        ; 0.000      ; 0.657      ;
+; 0.379 ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; clk          ; clk         ; 1.000        ; 0.000      ; 0.657      ;
+; 0.379 ; bloco_de_controle:controle_inst|estado_atual.executa   ; bloco_de_controle:controle_inst|estado_atual.executa   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.657      ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Slow Model Hold: 'clk'                                                                                                                                                                  ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node                                           ; To Node                                             ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; 0.391 ; bloco_de_controle:controle_inst|estado_atual.idle   ; bloco_de_controle:controle_inst|estado_atual.idle   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.512 ; bloco_de_controle:controle_inst|estado_atual.exec   ; bloco_de_controle:controle_inst|estado_atual.finish ; clk          ; clk         ; 0.000        ; 0.000      ; 0.778      ;
-; 0.517 ; bloco_de_controle:controle_inst|estado_atual.idle   ; bloco_de_controle:controle_inst|estado_atual.exec   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.783      ;
-; 0.525 ; bloco_de_controle:controle_inst|estado_atual.finish ; bloco_de_controle:controle_inst|estado_atual.idle   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Hold: 'clk'                                                                                                                                                                        ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                                              ; To Node                                                ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.391 ; bloco_de_controle:controle_inst|estado_atual.resetando ; bloco_de_controle:controle_inst|estado_atual.resetando ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; bloco_de_controle:controle_inst|estado_atual.idle      ; bloco_de_controle:controle_inst|estado_atual.idle      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; bloco_de_controle:controle_inst|estado_atual.executa   ; bloco_de_controle:controle_inst|estado_atual.executa   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; bloco_de_controle:controle_inst|estado_atual.mostra    ; bloco_de_controle:controle_inst|estado_atual.mostra    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.517 ; bloco_de_controle:controle_inst|estado_atual.idle      ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.783      ;
+; 0.517 ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; bloco_de_controle:controle_inst|estado_atual.executa   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.783      ;
+; 0.520 ; bloco_de_controle:controle_inst|estado_atual.resetando ; bloco_de_controle:controle_inst|estado_atual.idle      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.786      ;
+; 0.520 ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.786      ;
+; 0.522 ; bloco_de_controle:controle_inst|estado_atual.executa   ; bloco_de_controle:controle_inst|estado_atual.mostra    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.788      ;
+; 0.551 ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.817      ;
+; 0.706 ; bloco_de_controle:controle_inst|estado_atual.mostra    ; bloco_de_controle:controle_inst|estado_atual.resetando ; clk          ; clk         ; 0.000        ; 0.000      ; 0.972      ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------+
-; Slow Model Minimum Pulse Width: 'clk'                                                                                                ;
-+--------+--------------+----------------+------------------+-------+------------+-----------------------------------------------------+
-; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                                              ;
-+--------+--------------+----------------+------------------+-------+------------+-----------------------------------------------------+
-; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; clk   ; Rise       ; clk                                                 ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.exec   ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.exec   ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.finish ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.finish ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.idle   ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.idle   ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk|combout                                         ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk|combout                                         ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|inclk[0]                                ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|inclk[0]                                ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|outclk                                  ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|outclk                                  ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.exec|clk                 ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.exec|clk                 ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.finish|clk               ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.finish|clk               ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.idle|clk                 ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.idle|clk                 ;
-+--------+--------------+----------------+------------------+-------+------------+-----------------------------------------------------+
-
-
-+-------------------------------------------------------------------------+
-; Setup Times                                                             ;
-+-----------+------------+--------+--------+------------+-----------------+
-; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
-+-----------+------------+--------+--------+------------+-----------------+
-; start     ; clk        ; -0.605 ; -0.605 ; Rise       ; clk             ;
-+-----------+------------+--------+--------+------------+-----------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Minimum Pulse Width: 'clk'                                                                                                   ;
++--------+--------------+----------------+------------------+-------+------------+--------------------------------------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                                                 ;
++--------+--------------+----------------+------------------+-------+------------+--------------------------------------------------------+
+; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; clk   ; Rise       ; clk                                                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.digita_A  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.digita_A  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.digita_B  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.digita_B  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.executa   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.executa   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.idle      ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.idle      ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.mostra    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.mostra    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.resetando ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.resetando ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.sel_op    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.sel_op    ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk|combout                                            ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk|combout                                            ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|inclk[0]                                   ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|inclk[0]                                   ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|outclk                                     ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|outclk                                     ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.digita_A|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.digita_A|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.digita_B|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.digita_B|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.executa|clk                 ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.executa|clk                 ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.idle|clk                    ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.idle|clk                    ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.mostra|clk                  ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.mostra|clk                  ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.resetando|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.resetando|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.sel_op|clk                  ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.sel_op|clk                  ;
++--------+--------------+----------------+------------------+-------+------------+--------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------+
-; Hold Times                                                            ;
+; Setup Times                                                           ;
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; start     ; clk        ; 0.837 ; 0.837 ; Rise       ; clk             ;
+; start     ; clk        ; 3.209 ; 3.209 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; start     ; clk        ; -2.945 ; -2.945 ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
 
 
 +-----------------------------------------------------------------------+
@@ -224,8 +260,8 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; leds[*]   ; clk        ; 6.366 ; 6.366 ; Rise       ; clk             ;
-;  leds[7]  ; clk        ; 6.366 ; 6.366 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 6.109 ; 6.109 ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 6.109 ; 6.109 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -234,8 +270,8 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; leds[*]   ; clk        ; 6.366 ; 6.366 ; Rise       ; clk             ;
-;  leds[7]  ; clk        ; 6.366 ; 6.366 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 6.109 ; 6.109 ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 6.109 ; 6.109 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -244,7 +280,7 @@ No paths to report.
 +-------+-------+---------------+
 ; Clock ; Slack ; End Point TNS ;
 +-------+-------+---------------+
-; clk   ; 0.640 ; 0.000         ;
+; clk   ; 0.559 ; 0.000         ;
 +-------+-------+---------------+
 
 
@@ -274,77 +310,113 @@ No paths to report.
 +-------+--------+-----------------------+
 ; Clock ; Slack  ; End Point TNS         ;
 +-------+--------+-----------------------+
-; clk   ; -1.380 ; -4.380                ;
+; clk   ; -1.380 ; -8.380                ;
 +-------+--------+-----------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Fast Model Setup: 'clk'                                                                                                                                                                 ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node                                           ; To Node                                             ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; 0.640 ; bloco_de_controle:controle_inst|estado_atual.finish ; bloco_de_controle:controle_inst|estado_atual.idle   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.392      ;
-; 0.642 ; bloco_de_controle:controle_inst|estado_atual.idle   ; bloco_de_controle:controle_inst|estado_atual.exec   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.390      ;
-; 0.645 ; bloco_de_controle:controle_inst|estado_atual.exec   ; bloco_de_controle:controle_inst|estado_atual.finish ; clk          ; clk         ; 1.000        ; 0.000      ; 0.387      ;
-; 0.665 ; bloco_de_controle:controle_inst|estado_atual.idle   ; bloco_de_controle:controle_inst|estado_atual.idle   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.367      ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Setup: 'clk'                                                                                                                                                                       ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                                              ; To Node                                                ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.559 ; bloco_de_controle:controle_inst|estado_atual.mostra    ; bloco_de_controle:controle_inst|estado_atual.resetando ; clk          ; clk         ; 1.000        ; 0.000      ; 0.473      ;
+; 0.622 ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; clk          ; clk         ; 1.000        ; 0.000      ; 0.410      ;
+; 0.639 ; bloco_de_controle:controle_inst|estado_atual.executa   ; bloco_de_controle:controle_inst|estado_atual.mostra    ; clk          ; clk         ; 1.000        ; 0.000      ; 0.393      ;
+; 0.641 ; bloco_de_controle:controle_inst|estado_atual.resetando ; bloco_de_controle:controle_inst|estado_atual.idle      ; clk          ; clk         ; 1.000        ; 0.000      ; 0.391      ;
+; 0.641 ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; clk          ; clk         ; 1.000        ; 0.000      ; 0.391      ;
+; 0.642 ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; bloco_de_controle:controle_inst|estado_atual.executa   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.390      ;
+; 0.643 ; bloco_de_controle:controle_inst|estado_atual.idle      ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; clk          ; clk         ; 1.000        ; 0.000      ; 0.389      ;
+; 0.665 ; bloco_de_controle:controle_inst|estado_atual.resetando ; bloco_de_controle:controle_inst|estado_atual.resetando ; clk          ; clk         ; 1.000        ; 0.000      ; 0.367      ;
+; 0.665 ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; clk          ; clk         ; 1.000        ; 0.000      ; 0.367      ;
+; 0.665 ; bloco_de_controle:controle_inst|estado_atual.mostra    ; bloco_de_controle:controle_inst|estado_atual.mostra    ; clk          ; clk         ; 1.000        ; 0.000      ; 0.367      ;
+; 0.665 ; bloco_de_controle:controle_inst|estado_atual.idle      ; bloco_de_controle:controle_inst|estado_atual.idle      ; clk          ; clk         ; 1.000        ; 0.000      ; 0.367      ;
+; 0.665 ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; clk          ; clk         ; 1.000        ; 0.000      ; 0.367      ;
+; 0.665 ; bloco_de_controle:controle_inst|estado_atual.executa   ; bloco_de_controle:controle_inst|estado_atual.executa   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.367      ;
+; 0.665 ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; clk          ; clk         ; 1.000        ; 0.000      ; 0.367      ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Fast Model Hold: 'clk'                                                                                                                                                                  ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; Slack ; From Node                                           ; To Node                                             ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
-; 0.215 ; bloco_de_controle:controle_inst|estado_atual.idle   ; bloco_de_controle:controle_inst|estado_atual.idle   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.235 ; bloco_de_controle:controle_inst|estado_atual.exec   ; bloco_de_controle:controle_inst|estado_atual.finish ; clk          ; clk         ; 0.000        ; 0.000      ; 0.387      ;
-; 0.238 ; bloco_de_controle:controle_inst|estado_atual.idle   ; bloco_de_controle:controle_inst|estado_atual.exec   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.390      ;
-; 0.240 ; bloco_de_controle:controle_inst|estado_atual.finish ; bloco_de_controle:controle_inst|estado_atual.idle   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
-+-------+-----------------------------------------------------+-----------------------------------------------------+--------------+-------------+--------------+------------+------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Hold: 'clk'                                                                                                                                                                        ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                                              ; To Node                                                ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.215 ; bloco_de_controle:controle_inst|estado_atual.resetando ; bloco_de_controle:controle_inst|estado_atual.resetando ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; bloco_de_controle:controle_inst|estado_atual.idle      ; bloco_de_controle:controle_inst|estado_atual.idle      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; bloco_de_controle:controle_inst|estado_atual.executa   ; bloco_de_controle:controle_inst|estado_atual.executa   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; bloco_de_controle:controle_inst|estado_atual.mostra    ; bloco_de_controle:controle_inst|estado_atual.mostra    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.237 ; bloco_de_controle:controle_inst|estado_atual.idle      ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.389      ;
+; 0.238 ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; bloco_de_controle:controle_inst|estado_atual.executa   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.390      ;
+; 0.239 ; bloco_de_controle:controle_inst|estado_atual.resetando ; bloco_de_controle:controle_inst|estado_atual.idle      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.391      ;
+; 0.239 ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; bloco_de_controle:controle_inst|estado_atual.digita_B  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.391      ;
+; 0.241 ; bloco_de_controle:controle_inst|estado_atual.executa   ; bloco_de_controle:controle_inst|estado_atual.mostra    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
+; 0.258 ; bloco_de_controle:controle_inst|estado_atual.sel_op    ; bloco_de_controle:controle_inst|estado_atual.digita_A  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.410      ;
+; 0.321 ; bloco_de_controle:controle_inst|estado_atual.mostra    ; bloco_de_controle:controle_inst|estado_atual.resetando ; clk          ; clk         ; 0.000        ; 0.000      ; 0.473      ;
++-------+--------------------------------------------------------+--------------------------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------+
-; Fast Model Minimum Pulse Width: 'clk'                                                                                                ;
-+--------+--------------+----------------+------------------+-------+------------+-----------------------------------------------------+
-; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                                              ;
-+--------+--------------+----------------+------------------+-------+------------+-----------------------------------------------------+
-; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; clk   ; Rise       ; clk                                                 ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.exec   ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.exec   ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.finish ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.finish ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.idle   ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.idle   ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk|combout                                         ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk|combout                                         ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|inclk[0]                                ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|inclk[0]                                ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|outclk                                  ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|outclk                                  ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.exec|clk                 ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.exec|clk                 ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.finish|clk               ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.finish|clk               ;
-; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.idle|clk                 ;
-; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.idle|clk                 ;
-+--------+--------------+----------------+------------------+-------+------------+-----------------------------------------------------+
-
-
-+-------------------------------------------------------------------------+
-; Setup Times                                                             ;
-+-----------+------------+--------+--------+------------+-----------------+
-; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
-+-----------+------------+--------+--------+------------+-----------------+
-; start     ; clk        ; -0.640 ; -0.640 ; Rise       ; clk             ;
-+-----------+------------+--------+--------+------------+-----------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Minimum Pulse Width: 'clk'                                                                                                   ;
++--------+--------------+----------------+------------------+-------+------------+--------------------------------------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                                                 ;
++--------+--------------+----------------+------------------+-------+------------+--------------------------------------------------------+
+; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; clk   ; Rise       ; clk                                                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.digita_A  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.digita_A  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.digita_B  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.digita_B  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.executa   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.executa   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.idle      ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.idle      ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.mostra    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.mostra    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.resetando ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.resetando ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.sel_op    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; bloco_de_controle:controle_inst|estado_atual.sel_op    ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk|combout                                            ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk|combout                                            ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|inclk[0]                                   ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|inclk[0]                                   ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|outclk                                     ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|outclk                                     ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.digita_A|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.digita_A|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.digita_B|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.digita_B|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.executa|clk                 ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.executa|clk                 ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.idle|clk                    ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.idle|clk                    ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.mostra|clk                  ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.mostra|clk                  ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.resetando|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.resetando|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; controle_inst|estado_atual.sel_op|clk                  ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; controle_inst|estado_atual.sel_op|clk                  ;
++--------+--------------+----------------+------------------+-------+------------+--------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------+
-; Hold Times                                                            ;
+; Setup Times                                                           ;
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; start     ; clk        ; 0.762 ; 0.762 ; Rise       ; clk             ;
+; start     ; clk        ; 1.776 ; 1.776 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; start     ; clk        ; -1.651 ; -1.651 ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
 
 
 +-----------------------------------------------------------------------+
@@ -352,8 +424,8 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; leds[*]   ; clk        ; 3.647 ; 3.647 ; Rise       ; clk             ;
-;  leds[7]  ; clk        ; 3.647 ; 3.647 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 3.494 ; 3.494 ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 3.494 ; 3.494 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -362,8 +434,8 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; leds[*]   ; clk        ; 3.647 ; 3.647 ; Rise       ; clk             ;
-;  leds[7]  ; clk        ; 3.647 ; 3.647 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 3.494 ; 3.494 ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 3.494 ; 3.494 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -372,29 +444,29 @@ No paths to report.
 +------------------+-------+-------+----------+---------+---------------------+
 ; Clock            ; Setup ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +------------------+-------+-------+----------+---------+---------------------+
-; Worst-case Slack ; 0.245 ; 0.215 ; N/A      ; N/A     ; -1.380              ;
-;  clk             ; 0.245 ; 0.215 ; N/A      ; N/A     ; -1.380              ;
-; Design-wide TNS  ; 0.0   ; 0.0   ; 0.0      ; 0.0     ; -4.38               ;
-;  clk             ; 0.000 ; 0.000 ; N/A      ; N/A     ; -4.380              ;
+; Worst-case Slack ; 0.064 ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+;  clk             ; 0.064 ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+; Design-wide TNS  ; 0.0   ; 0.0   ; 0.0      ; 0.0     ; -8.38               ;
+;  clk             ; 0.000 ; 0.000 ; N/A      ; N/A     ; -8.380              ;
 +------------------+-------+-------+----------+---------+---------------------+
 
 
-+-------------------------------------------------------------------------+
-; Setup Times                                                             ;
-+-----------+------------+--------+--------+------------+-----------------+
-; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
-+-----------+------------+--------+--------+------------+-----------------+
-; start     ; clk        ; -0.605 ; -0.605 ; Rise       ; clk             ;
-+-----------+------------+--------+--------+------------+-----------------+
-
-
 +-----------------------------------------------------------------------+
-; Hold Times                                                            ;
+; Setup Times                                                           ;
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; start     ; clk        ; 0.837 ; 0.837 ; Rise       ; clk             ;
+; start     ; clk        ; 3.209 ; 3.209 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; start     ; clk        ; -1.651 ; -1.651 ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
 
 
 +-----------------------------------------------------------------------+
@@ -402,8 +474,8 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; leds[*]   ; clk        ; 6.366 ; 6.366 ; Rise       ; clk             ;
-;  leds[7]  ; clk        ; 6.366 ; 6.366 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 6.109 ; 6.109 ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 6.109 ; 6.109 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -412,8 +484,8 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; leds[*]   ; clk        ; 3.647 ; 3.647 ; Rise       ; clk             ;
-;  leds[7]  ; clk        ; 3.647 ; 3.647 ; Rise       ; clk             ;
+; leds[*]   ; clk        ; 3.494 ; 3.494 ; Rise       ; clk             ;
+;  leds[7]  ; clk        ; 3.494 ; 3.494 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -422,7 +494,7 @@ No paths to report.
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 4        ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 14       ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -432,7 +504,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 4        ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 14       ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -457,7 +529,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
 ; Unconstrained Input Ports       ; 2     ; 2    ;
-; Unconstrained Input Port Paths  ; 5     ; 5    ;
+; Unconstrained Input Port Paths  ; 14    ; 14   ;
 ; Unconstrained Output Ports      ; 1     ; 1    ;
 ; Unconstrained Output Port Paths ; 1     ; 1    ;
 +---------------------------------+-------+------+
@@ -469,7 +541,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Dec 11 10:14:02 2025
+    Info: Processing started: Fri Dec 12 09:40:47 2025
 Info: Command: quartus_sta projeto_final -c projeto_final
 Info: qsta_default_script.tcl version: #1
 Warning (20028): Parallel compilation is not licensed and has been disabled
@@ -481,10 +553,10 @@ Info (332105): Deriving Clocks
     Info (332105): create_clock -period 1.000 -name clk clk
 Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow Model
-Info (332146): Worst-case setup slack is 0.245
+Info (332146): Worst-case setup slack is 0.064
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
-    Info (332119):     0.245         0.000 clk 
+    Info (332119):     0.064         0.000 clk 
 Info (332146): Worst-case hold slack is 0.391
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
@@ -495,13 +567,13 @@ Critical Warning (332148): Timing requirements not met
 Info (332146): Worst-case minimum pulse width slack is -1.380
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
-    Info (332119):    -1.380        -4.380 clk 
+    Info (332119):    -1.380        -8.380 clk 
 Info (332001): The selected device family is not supported by the report_metastability command.
 Info: Analyzing Fast Model
-Info (332146): Worst-case setup slack is 0.640
+Info (332146): Worst-case setup slack is 0.559
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
-    Info (332119):     0.640         0.000 clk 
+    Info (332119):     0.559         0.000 clk 
 Info (332146): Worst-case hold slack is 0.215
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
@@ -512,14 +584,14 @@ Critical Warning (332148): Timing requirements not met
 Info (332146): Worst-case minimum pulse width slack is -1.380
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
-    Info (332119):    -1.380        -4.380 clk 
+    Info (332119):    -1.380        -8.380 clk 
 Info (332001): The selected device family is not supported by the report_metastability command.
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 4543 megabytes
-    Info: Processing ended: Thu Dec 11 10:14:03 2025
-    Info: Elapsed time: 00:00:01
+    Info: Peak virtual memory: 4542 megabytes
+    Info: Processing ended: Fri Dec 12 09:40:49 2025
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 
