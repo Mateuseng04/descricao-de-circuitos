@@ -7,7 +7,8 @@ entity Projeto_final is
         clk    : in std_logic;
         reset  : in std_logic;
         start  : in std_logic;
-        leds   : out std_logic_vector(7 downto 0)
+        leds   : out std_logic_vector(7 downto 0);
+        numero : in STD_LOGIC_VECTOR (3 downto 0)
     );
 end entity;
 
@@ -20,7 +21,7 @@ architecture comportamento of Projeto_final is
 begin
 
     controle_inst : entity work.bloco_de_controle
-        port map (
+            port map (
             clk    => clk,
             reset  => reset,
             start  => start,
@@ -28,7 +29,8 @@ begin
             sel1   => sel1_s,
             sel2   => sel2_s,
             sel3   => sel3_s,
-            done   => done_s
+            done   => done_s,
+            numero => numero
         );
 
     ula_inst : entity work.ula
