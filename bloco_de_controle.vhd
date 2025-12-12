@@ -26,9 +26,9 @@
 
     architecture rtl of bloco_de_controle is
     
-        --------------------------------------------------------------------
+        
         -- DEFINIÇÃO DOS ESTADOS
-        --------------------------------------------------------------------
+        
         type state_type is (
             idle,
             sel_op,
@@ -41,17 +41,17 @@
 
         signal estado_atual, proximo_estado : state_type;
         
-        --------------------------------------------------------------------
+        
         -- REGISTRADORES INTERNOS
-        --------------------------------------------------------------------
+        
         signal A_s, B_s : std_logic_vector(3 downto 0);
         signal op_s     : std_logic_vector(2 downto 0);
 
     begin
         estado_dbg <= STD_LOGIC_VECTOR(to_unsigned(state_type'pos(estado_atual), 3));
-        --------------------------------------------------------------------
+        
         -- PROCESSO SEQUENCIAL: REGISTRADOR DE ESTADOS
-        --------------------------------------------------------------------
+        
         process(clk, reset)
         begin
             if reset = '1' then
@@ -62,9 +62,9 @@
         end process;
 
 
-        --------------------------------------------------------------------
+        
         -- PROCESSO COMBINACIONAL: LÓGICA DE PRÓXIMO ESTADO
-        --------------------------------------------------------------------
+        
         process(estado_atual, start)
         begin
             proximo_estado <= estado_atual; -- padrão: permanecer no estado
@@ -110,9 +110,9 @@
         end process;
 
 
-        --------------------------------------------------------------------
+        
         -- PROCESSO SEQUENCIAL: REGISTRADORES DE OPERANDO E OPERAÇÃO
-        --------------------------------------------------------------------
+        
         process(clk, reset)
         begin
             if reset = '1' then
@@ -152,23 +152,23 @@
         end process;
 
 
-        --------------------------------------------------------------------
+        
         -- SAÍDAS PARA A ULA / OPERANDO / OPERAÇÃO
-        --------------------------------------------------------------------
+        
         A_reg  <= A_s;
         B_reg  <= B_s;
         op_reg <= op_s;
 
-        --------------------------------------------------------------------
+        
         -- SELETORES DA ULA
-        --------------------------------------------------------------------
-        sel1 <= opcode(2 downto 1);
+        
+        sel1 <= op_s(2 downto 1);
         sel2 <= "00";
-        sel3 <= opcode(0) & '0';
+        sel3 <= op_s(0) & '0';
 
-        --------------------------------------------------------------------
+        
         -- DONE É 1 SOMENTE NO ESTADO "mostra"
-        --------------------------------------------------------------------
+        
         done <= '1' when estado_atual = mostra else '0';
 
     end architecture rtl;
